@@ -10,6 +10,7 @@ RUN apt-get update -y && \
         curl \
         nginx \
         php7.2 \
+        php7.2-dom \
         php7.2-fpm \
         php7.2-mbstring \
         php7.2-mysql \
@@ -36,7 +37,8 @@ ENV WORK_USER laravel
 
 RUN useradd -m ${WORK_USER}
 
-RUN gosu ${WORK_USER} composer global require "laravel/installer"
+RUN gosu ${WORK_USER} composer global require "laravel/installer" && \
+    ln -s /home/${WORK_USER}/.composer/vendor/bin/laravel /usr/local/bin/
 
 COPY ./conf/nginx/sites-enabled/default /etc/nginx/sites-enabled/
 
