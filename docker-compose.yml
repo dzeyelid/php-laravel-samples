@@ -1,0 +1,23 @@
+version: "3"
+services:
+  web:
+    build: web/
+    image: ${PROJECT_PREFIX}-web
+    container_name: ${PROJECT_PREFIX}-web
+    volumes:
+      - ./web/app:/var/www/html
+    environment:
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - 80:80
+    links:
+      - db
+
+  db:
+    image: mysql
+    container_name: ${PROJECT_PREFIX}-db
+    restart: always
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
