@@ -30,7 +30,16 @@ docker exec -it --user laravel php-laravel-samples-web /bin/bash
 laravel@f63ab0f00c50:/var/www/html$ laravel new <project name>
 ```
 
-Then you access `http://localhost/<project name>/public/`, you can see Laravel logo.
+The project is placed under `web/app/<project name>` on local machine.
+
+And you should change webroot at `web/conf/nginx/sites-enabled/default`.
+
+```diff:web/conf/nginx/sites-enabled/default
+-       root /var/www/html/notes/public;
++       root /var/www/html/<project name>/public;
+```
+
+Then you access `http://localhost/`, you can see a Laravel project page.
 
 
 How to stop
