@@ -18,6 +18,18 @@ cd php-laravel-samples
 docker-compose up -d
 ```
 
+How to initialize
+----
+
+```bash
+cd php-laravel-samples
+mv .env.local .env
+docker-compose up -d
+docker exec -it --user laravel php-laravel-samples-web /bin/bash
+php artisan key:generate
+php artisan migrate
+```
+
 How to create new projects
 ----
 
