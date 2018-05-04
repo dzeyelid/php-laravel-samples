@@ -1,0 +1,197 @@
+swagger: 2.0
+info:
+  description: "This is a difinition of voting system for php-laravel-samples project."
+  vesion: 1.0.0
+  title: "Voting system API (php-laravel-samples)"
+host: localhost
+basePath: /v1
+tags:
+- name: poll
+  description: actions to manage poll
+- name: vote
+  description: actions to manage voting
+schemes:
+- http
+paths:
+  /polls:
+    get:
+      tags:
+        - poll
+      summary: List polls
+      produces:
+        - application/json
+      responses:
+        200:
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Poll"
+    post:
+      tags:
+        - poll
+      summary: Create new poll
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                required: true
+                description: Poll title
+              description:
+                type: string
+                required: false
+                description: Poll description
+              choices:
+                type: array
+                items:
+                  type: string
+                required: true
+                description: Choices (required)
+      responses:
+        200:
+          description: success
+  /polls/{pollId}:
+    get:
+      tags:
+        - poll
+      summary: Show the specified poll
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: pollId
+          schema:
+            type: interger
+          required: true
+          description: specified poll id
+      responses:
+        200:
+          schema:
+            $ref: "#/definitions/Poll"
+    put:
+      tags:
+        - poll
+      summary: Update the specified poll and choices
+      description: >
+        Edit title and description of a poll.
+        And Add and deleted new choices.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: pollId
+          schema:
+            type: interger
+          required: true
+          description: specified poll id to update
+        - in: body
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                required: true
+                description: Poll title
+              description:
+                type: string
+                required: false
+                description: Poll description
+              choices:
+                type: array
+                items:
+                  type: string
+                required: true
+                description: Choices (required)
+      responses:
+        200:
+          description: success
+    delete:
+      tags:
+        - poll
+      summary: Delete the specified poll
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: pollId
+          schema:
+            type: interger
+          required: true
+          description: specified poll id to delete
+      responses:
+        200:
+          description: success
+  /polls/{pollId}/vote/{choiceId}:
+    post:
+      tags:
+        - vote
+      summary: Vote to the specified choice
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: pollId
+          schema:
+            type: interger
+          required: true
+          description: specified poll id to vote
+        - in: path
+          name: choiceId
+          schema:
+            type: interger
+          required: true
+          description: specified choice id to vote
+      responses:
+        200:
+          description: success
+definitions:
+  Poll:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      title:
+        type: string
+      description:
+        type: string
+      Choices:
+        type: array
+        items:
+          $ref: "#/definitions/Choice"
+      created_at:
+        type: string
+        format: date-time
+      updated_at:
+        type: string
+        format: date-time
+  Choice:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      poll_id:
+        type: integer
+        format: int64
+      count:
+        type: integer
+        format: int64
+        default: 0
+      created_at:
+        type: string
+        format: date-time
+      updated_at:
+        type: string
+        format: date-time
+
+      
