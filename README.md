@@ -26,7 +26,7 @@ cd php-laravel-samples
 cp .env.local .env
 docker-compose up -d
 docker exec -it --user laravel php-laravel-samples-web /bin/bash
-cd notes
+cd polls
 php artisan key:generate
 php artisan migrate
 ```
@@ -34,7 +34,7 @@ php artisan migrate
 How to create new projects
 ----
 
-This project has `notes` project already. If you want another project, you can create by following code.
+This project has `polls` project already. If you want another project, you can create by following code.
 
 ```bash
 cd php-laravel-samples
@@ -48,7 +48,7 @@ The project is placed under `web/app/<project name>` on local machine.
 And you should change webroot at `web/conf/nginx/sites-enabled/default`.
 
 ```diff:web/conf/nginx/sites-enabled/default
--       root /var/www/html/notes/public;
+-       root /var/www/html/polls/public;
 +       root /var/www/html/<project name>/public;
 ```
 
