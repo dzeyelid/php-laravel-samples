@@ -7,6 +7,9 @@ services:
     volumes:
       - ./web/app:/var/www/html
     environment:
+      DB_HOST: db
+      DB_DATABASE: ${MYSQL_DATABASE}
+      DB_USERNAME: ${MYSQL_USER}
       DB_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - 80:80
@@ -14,10 +17,13 @@ services:
       - db
 
   db:
-    image: mysql
+    image: mysql:5.7
     container_name: ${PROJECT_PREFIX}-db
     restart: always
     volumes:
       - ./mysql/data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
