@@ -23,9 +23,10 @@ How to initialize
 
 ```bash
 cd php-laravel-samples
-mv .env.local .env
+cp .env.local .env
 docker-compose up -d
 docker exec -it --user laravel php-laravel-samples-web /bin/bash
+cd notes
 php artisan key:generate
 php artisan migrate
 ```
