@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Poll;
+use \App\Poll;
 use Illuminate\Http\Request;
 
 class PollController extends Controller
@@ -14,7 +14,8 @@ class PollController extends Controller
      */
     public function index()
     {
-        //
+        $polls = \App\Poll::all();
+        return view('polls', ['polls' => $polls]);
     }
 
     /**
