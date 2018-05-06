@@ -23,12 +23,8 @@
                     </div>
                 </div>
             @show
-            
-            <div class="row">
-                <div class="col">
-                    @yield('content')
-                </div>
-            </div>
         </div>
+            
+        @yield('content')
     </body>
 </html>
