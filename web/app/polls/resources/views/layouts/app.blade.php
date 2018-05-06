@@ -10,22 +10,24 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
-        <style>
-            html, body {
-                font-family: 'Raleway', sans-serif;
-            }
-        </style>
+        <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
+
+        <script src="{{ mix('/js/app.js') }}"></script>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div class="container">
             @section('topbar')
-                <div class="top-right">
-                    <h1>Polls - @yield('title')</h1>
+                <div class="row align-items-start">
+                    <div class="col">
+                        <h1>Polls - @yield('title')</h1>
+                    </div>
                 </div>
             @show
-
-            <div class="container">
-                @yield('content')
+            
+            <div class="row">
+                <div class="col">
+                    @yield('content')
+                </div>
             </div>
         </div>
     </body>

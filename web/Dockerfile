@@ -2,13 +2,17 @@ FROM ubuntu:16.04
 
 RUN apt-get update -y && \
     apt-get install -y \
+        curl \
         software-properties-common \
     && \
     LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php && \
+    curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     apt-get update -y && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
-        curl \
+        build-essential \
+        dh-autoreconf \
         nginx \
+        nodejs \
         php7.2 \
         php7.2-dom \
         php7.2-fpm \
